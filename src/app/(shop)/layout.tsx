@@ -3,9 +3,9 @@ import { PropsWithChildren } from 'react'
 
 export default function layout({ children }: PropsWithChildren) {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <TopMenu />
-      {children}
-    </div>
+      <div className="px-0 sm:px-10">{children}</div>
+    </main>
   )
 }
