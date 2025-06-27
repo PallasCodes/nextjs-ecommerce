@@ -1,6 +1,8 @@
-import { titleFont } from '@/config/fonts'
 import Link from 'next/link'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
+
+import { titleFont } from '@/config/fonts'
+import { MenuBtn } from './MenuBtn'
 
 export const TopMenu = () => {
   return (
@@ -46,9 +48,7 @@ export const TopMenu = () => {
           </div>
         </Link>
 
-        <button className="m-2 p-2 rounded-md transition-all hover:bg-gray-100">
-          Menu
-        </button>
+        <MenuBtn />
       </div>
     </nav>
   )
