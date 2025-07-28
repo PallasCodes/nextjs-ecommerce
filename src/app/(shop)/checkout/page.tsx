@@ -1,9 +1,7 @@
 import { QuantitySelector, Title } from '@/components'
 import { initialData } from '@/seed/seed'
-import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { IoCartOutline } from 'react-icons/io5'
 
 const productsInCart = [
   initialData.products[0],
@@ -11,31 +9,18 @@ const productsInCart = [
   initialData.products[2]
 ]
 
-interface Props {
-  params: {
-    id: string
-  }
-}
-
-export default function ({ params }: Props) {
-  const id = params.id
-
+export default function () {
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:p-0">
       <div className="flex flex-col w-[1000px]">
-        <Title title={`Order #${id}`} />
+        <Title title="Verify Order" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           <div className="flex flex-col mt-5">
-            <div
-              className={clsx(
-                'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
-                { 'bg-red-500': false, 'bg-green-700': true }
-              )}
-            >
-              <IoCartOutline size={30} />
-              <span className="mx-2">Payed</span>
-            </div>
+            <span className="text-xl">Change elements</span>
+            <Link href="/cart" className="underline mb-5">
+              Update cart
+            </Link>
 
             {productsInCart.map((product) => (
               <div key={product.slug} className="flex mb-5">
