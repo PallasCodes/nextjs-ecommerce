@@ -1,4 +1,4 @@
-import type { Size } from '@/sinterfaces'
+import type { Size } from '@/interfaces'
 import clsx from 'clsx'
 
 interface Props {

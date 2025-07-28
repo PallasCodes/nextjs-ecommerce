@@ -1,9 +1,9 @@
+import { getPaginatedProductsWithImages } from '@/actions/products/product-pagination'
 import { ProductGrid, Title } from '@/components'
-import { initialData } from '@/seed/seed'
+import { Product } from '@/interfaces/product.interface'
 
-const products = initialData.products
-
-export default function Home() {
+export default async function Home() {
+  const { products } = await getPaginatedProductsWithImages()
   return (
     <>
       <Title title="Shop" subtitle="All products" className="mb-2" />

@@ -1,6 +1,6 @@
 import { Title, ProductGrid } from '@/components'
 import { initialData } from '@/seed/seed'
-import { Category } from '@/sinterfaces'
+import { Category } from '@/interfaces'
 import { notFound } from 'next/navigation'
 
 interface Props {
