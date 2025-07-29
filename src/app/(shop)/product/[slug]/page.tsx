@@ -1,13 +1,28 @@
+export const revalidate = 604800
+
 import { notFound } from 'next/navigation'
 
-import {
-  ProductMobileSlideshow,
-  ProductSlideshow,
-  QuantitySelector,
-  SizeSelector
-} from '@/components'
+import { getProductBySlug } from '@/actions/products/get-product-by-slug'
+import { ProductMobileSlideshow, ProductSlideshow } from '@/components'
+import { StockLabel } from '@/components/product/stock-label/StockLabel'
 import { titleFont } from '@/config/fonts'
-import { initialData } from '@/seed/seed'
+import { AddToCart } from './ui/AddToCart'
+
+export async function generateMetadata({ params }: Props) {
+  const slug = params.slug
+
+  const product = await getProductBySlug(slug)
+
+  return {
+    title: product?.title ?? 'Product',
+    description: product?.description ?? '',
+    openGraph: {
+      title: product?.title ?? 'Product',
+      description: product?.description ?? '',
+      images: [`/products/${product?.images[1]}`]
+    }
+  }
+}
 
 interface Props {
   params: {
@@ -15,9 +30,9 @@ interface Props {
   }
 }
 
-export default function page({ params }: Props) {
+export default async function page({ params }: Props) {
   const { slug } = params
-  const product = initialData.products.find((product) => product.slug === slug)
+  const product = await getProductBySlug(slug)
 
   if (!product) {
     notFound()
@@ -42,16 +57,14 @@ export default function page({ params }: Props) {
       </div>
 
       <div className="col-span-1 px-5">
+        <StockLabel slug={product.slug} />
+
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
         <p className="text-lg mb-5">{product.price}</p>
 
-        <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
-
-        <QuantitySelector quantity={1} />
-
-        <button className="btn-primary my-5">Add to Cart</button>
+        <AddToCart product={product} />
 
         <h3 className="font-bold text-sm">Description</h3>
         <p className="font-lig">{product.description}</p>
