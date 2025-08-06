@@ -1,8 +1,8 @@
-import { QuantitySelector, Title } from '@/components'
+import { Title } from '@/components'
 import { initialData } from '@/seed/seed'
-import Image from 'next/image'
+
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { ProductsInCart } from './ui/ProductsInCart'
 
 const productsInCart = [
   initialData.products[0],
@@ -25,29 +25,7 @@ export default function () {
               Keep buying
             </Link>
 
-            {productsInCart.map((product) => (
-              <div key={product.slug} className="flex mb-5">
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  width={100}
-                  height={100}
-                  alt={product.title}
-                  className="mr-5 rounded"
-                  style={{
-                    width: '100px',
-                    height: '100px'
-                  }}
-                />
-
-                <div className="">
-                  <p>{product.title}</p>
-                  <p>${product.price}</p>
-                  <QuantitySelector quantity={3} />
-
-                  <button className="underline mt-3 text-sm">Remove</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
 
           <div className=" bg-white rounded-xl shadow-xl p-7 h-fit">
